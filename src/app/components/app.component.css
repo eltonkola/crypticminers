@@ -1,0 +1,24 @@
+
+.footer{
+  padding: 0 15px;
+    z-index: 1;
+    background-color: #bdbdbd;
+    height: 40px;
+}
+
+.footer_right{
+  text-align: right;
+    padding: 6px;
+}
+
+.footer_left{
+  text-align: left;
+  padding: 6px;
+}
+
+
+
+
+.menu_left{
+    background-color: blanchedalmond;
+}

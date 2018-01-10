@@ -1,0 +1,57 @@
+
+  <div fxFlexFill fxLayout="column">
+
+    <!-- header -->
+      <div>
+          <mat-toolbar color="primary" class="mat-elevation-z6">
+          <mat-toolbar-row>
+              <a class="nav-link home" href="/">
+                <img alt="Home" height="40" src="assets/logo.png" title="Home"  class="">
+
+              </a>
+              <!-- <span>Muzika Shqip</span> -->
+
+
+              <span style="flex: 1 1 auto;"></span>
+
+              <!-- <mat-icon style=" padding: 0 14px">favorite</mat-icon>
+              <mat-icon style="padding: 0 14px">delete</mat-icon> -->
+
+              <a mat-button *ngFor="let node of linkx" routerLink="/{{node.url}}">
+                  {{ node.title }}
+              </a>
+
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+
+      <!-- body -->
+    <div fxFlex="100" fxFlex>
+        <!-- menu left -->
+        <div fxFlex="20" class="menu_left" class="mat-elevation-z6">
+            <app-menu></app-menu>
+        </div>
+        <!-- center content -->
+        <div fxFlex="60" style="padding: 4px">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- menu right -->
+        <div fxFlex="20"  class="mat-elevation-z6">
+            <!-- <app-player> </app-player> -->
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div  class="footer" class="footer" >
+      <div fxFlex="30"class="footer_left" >
+          :) muzika eshte jeta
+      </div>
+      <div fxFlex="40" >
+          <!-- <app-miner></app-miner> -->
+      </div>
+      <div fxFlex="30" class="footer_right" >
+          created by misterk0
+      </div>
+
+    </div>
+  </div>
