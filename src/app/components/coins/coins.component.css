@@ -1,0 +1,12 @@
+.coin_logo{
+  width: 60px;
+  height: 60px;
+}
+
+
+
+.datazz {
+  overflow-y: auto;
+  background-color:white;
+  fxFlex:60;
+}

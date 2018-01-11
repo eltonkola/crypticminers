@@ -1,77 +1,83 @@
-import { Component, OnInit } from '@angular/core';
+import { Coin } from './../../model/coin';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CryptocompareService } from '../../services/cryptocompare.service';
 import { Chart } from 'chart.js';
-
+import {ViewChild} from '@angular/core';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-coins',
   templateUrl: './coins.component.html',
   styleUrls: ['./coins.component.css']
 })
-export class CoinsComponent implements OnInit {
+export class CoinsComponent implements OnInit, AfterViewInit  {
 
-  chart = [];
+  search = '';
+
+  /*
+  Id: "4321",
+  Url: "/coins/42/overview",
+  ImageUrl: "/media/12318415/42.png",
+  Name: "42",
+  Symbol: "42",
+  CoinName: "42 Coin",
+  FullName: "42 Coin (42)",
+  Algorithm: "Scrypt",
+  ProofType: "PoW/PoS",
+  FullyPremined: "0",
+  TotalCoinSupply: "42",
+  PreMinedValue: "N/A",
+  TotalCoinsFreeFloat: "N/A",
+  SortOrder: "34"
+  */
+
+  displayedColumns = ['SortOrder',
+                      'Logo',
+                      'Name',
+                      'Algorithm',
+                      'ProofType',
+                      'TotalCoinSupply',
+                      'Details'
+                    ];
+  dataSource = new MatTableDataSource<Coin>([]);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+
 
   constructor(private _cryptocompare: CryptocompareService) {}
 
   ngOnInit() {
-     this._cryptocompare.getCoins()
-       .subscribe(res => {
-         console.log(res);
+      this.dataSource = new MatTableDataSource<Coin>([]);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
 
-/*
-        let temp_max = res['Data'].map(res => res.TotalCoinSupply);
-        let temp_min = res['Data'].map(res => res.SortOrder);
-        let alldates = res['Data'].map(res => res)
+      this._cryptocompare.getCoins()
+                       .subscribe(
+                        data => {
+                          this.dataSource = new MatTableDataSource<Coin>(data);
+                          this.dataSource.paginator = this.paginator;
+                          this.dataSource.sort = this.sort;
+                        },
+                        error => {
+                         console.log('error loading coins' + error);
+                        }
+                     );
+  }
 
-        let weatherDates = []
-        alldates.forEach((res) => {
-            let jsdate = new Date(res * 1000)
-            weatherDates.push(jsdate.toLocaleTimeString('en', { year: 'numeric', month: 'short', day: 'numeric' }))
-        })
-
-*/
-        this.chart = new Chart('canvas', {
-    type: 'line',
-    data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+    this.dataSource.sort = this.sort;
+  }
 
 
-       })
-   }
 
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+  }
 
 
 }
