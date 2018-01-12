@@ -30,8 +30,10 @@ import {MatIconModule,
   MatStepperModule,
   MatTabsModule,
   MatTooltipModule,
-
+  MatSortModule,
         MatListModule} from '@angular/material';
+
+
 
 import { MatFormFieldModule } from '@angular/material';
 import { MatInputModule } from '@angular/material';
@@ -85,6 +87,7 @@ import { MatInputModule } from '@angular/material';
         MatPaginatorModule,
         MatProgressBarModule,
         MatDialogModule,
+        MatTabsModule,
     MatIconModule
   ],
 })

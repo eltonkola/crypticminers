@@ -1,3 +1,4 @@
+import { CoinDetailsComponent } from './components/coins/coin-details/coin-details.component';
 import { SafePipe } from './safe.pipe';
 import { from } from 'rxjs/observable/from';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +26,7 @@ import {CryptocompareService} from './services/cryptocompare.service';
     AboutComponent,
     SafePipe,
     ChatComponent,
+    CoinDetailsComponent,
     CoinsComponent
   ],
   imports: [

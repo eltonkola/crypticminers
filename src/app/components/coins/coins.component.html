@@ -3,14 +3,15 @@
               <span matPrefix>
                   <mat-icon matSuffix>search</mat-icon>
               </span>
-              <input (keyup)="applyFilter($event.target.value)" matInput type="text" placeholder="Search coin" [(ngModel)]="kerko"/>
-              <button mat-button *ngIf="kerko" matSuffix mat-icon-button aria-label="Pastro" (click)="kerko='';applyFilter('')">
+              <input (keyup)="applyFilter($event.target.value)" matInput type="text" placeholder="Search coin" [(ngModel)]="search"/>
+              <button mat-button *ngIf="search" matSuffix mat-icon-button aria-label="Pastro" (click)="search='';applyFilter('')">
                 <mat-icon>close</mat-icon>
               </button>
           </mat-form-field>
 
         <div class="datazz">
-      <mat-table #table [dataSource]="dataSource" matSort  matSortActive="SortOrder" matSortDisableClear matSortDirection="asc">
+            <mat-table #table [dataSource]="dataSource" matSort>
+
 
         <ng-container matColumnDef="SortOrder">
             <mat-header-cell *matHeaderCellDef  mat-sort-header> Nr </mat-header-cell>
@@ -50,7 +51,7 @@
             <mat-header-cell *matHeaderCellDef> Details </mat-header-cell>
             <mat-cell *matCellDef="let element">
 
-                <button mat-icon-button >
+                <button mat-icon-button routerLink="/coins/{{element.Symbol}}/{{element.Id}}">
                     <mat-icon>play_circle_outline</mat-icon>
                  </button>
 

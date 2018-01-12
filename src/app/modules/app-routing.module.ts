@@ -1,3 +1,4 @@
+import { CoinDetailsComponent } from './../components/coins/coin-details/coin-details.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,8 +12,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'coins', pathMatch: 'full' },
   { path: 'about', component: AboutComponent },
   { path: 'chat', component: ChatComponent },
-  { path: 'coins', component: CoinsComponent }
-
+  { path: 'coins', component: CoinsComponent },
+  { path: 'coins/:coin_name/:coin_id', component: CoinDetailsComponent }
 ];
 
 @NgModule({
